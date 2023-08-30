@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { HelperService } from './helper.service';
 import { promises as fsPromises } from 'fs';
-import { stock } from '../../../interfaces/stock.interface';
-import { transaction } from '../../../interfaces/transaction.interface';
+import { Stock } from '../../../interfaces/stock.interface';
+import { Transaction } from '../../../interfaces/transaction.interface';
 import { TRANSACTION_TYPE } from '../../../interfaces/enums';
 
 describe('HelperService', () => {
@@ -35,7 +35,7 @@ describe('HelperService', () => {
 
   describe('decorateStockLevels', () => {
     it('should convert stock data array to stock levels object', () => {
-      const stockData: stock[] = [
+      const stockData: Stock[] = [
         { sku: 'SKU001', stock: 10 },
         { sku: 'SKU002', stock: 20 },
       ];
@@ -55,7 +55,7 @@ describe('HelperService', () => {
         SKU001: 50,
         SKU002: 30,
       };
-      const transactionsData: transaction[] = [
+      const transactionsData: Transaction[] = [
         { sku: 'SKU001', type: TRANSACTION_TYPE.ORDER, qty: 5 },
         { sku: 'SKU002', type: TRANSACTION_TYPE.REFUND, qty: 10 },
       ];
@@ -75,7 +75,7 @@ describe('HelperService', () => {
       const stockLevels: { [key: string]: number } = {
         SKU001: 50,
       };
-      const transactionsData: transaction[] = [
+      const transactionsData: Transaction[] = [
         { sku: 'SKU001', type: TRANSACTION_TYPE.ORDER, qty: 5 },
         { sku: 'SKU002', type: TRANSACTION_TYPE.REFUND, qty: 10 },
       ];

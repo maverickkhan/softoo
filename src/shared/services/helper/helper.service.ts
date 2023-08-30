@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { readFile } from 'fs/promises';
-import { stock } from '../../../interfaces/stock.interface';
-import { transaction } from '../../../interfaces/transaction.interface';
+import { Stock } from '../../../interfaces/stock.interface';
+import { Transaction } from '../../../interfaces/transaction.interface';
 import { TRANSACTION_TYPE } from '../../../interfaces/enums';
 @Injectable()
 export class HelperService {
@@ -13,7 +13,7 @@ export class HelperService {
     return JSON.parse(content);
   }
 
-  decorateStockLevels(stockData: stock[]): { [key: string]: number } {
+  decorateStockLevels(stockData: Stock[]): { [key: string]: number } {
     const stockLevels = {};
     for (const item of stockData) {
       stockLevels[item.sku] = item.stock;
@@ -23,7 +23,7 @@ export class HelperService {
 
   applyTransactionToStockLevels(
     stockeLevels: { [key: string]: number },
-    transactionsData: transaction[],
+    transactionsData: Transaction[],
   ): { [key: string]: number } {
     // Process transactions from transactions.json
     for (const transaction of transactionsData) {

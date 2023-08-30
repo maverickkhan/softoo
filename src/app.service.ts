@@ -5,8 +5,8 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { HelperService } from './shared/services/helper/helper.service';
-import { transaction } from './interfaces/transaction.interface';
-import { stock } from './interfaces/stock.interface';
+import { Transaction } from './interfaces/transaction.interface';
+import { Stock } from './interfaces/stock.interface';
 
 @Injectable()
 export class AppService {
@@ -17,8 +17,8 @@ export class AppService {
   async getStockData(sku: string) {
     try {
       // Read stock.json and transactions.json
-      const stockData: stock[] = await this.helper.readJsonFile('stock.json');
-      const transactionsData: transaction[] =
+      const stockData: Stock[] = await this.helper.readJsonFile('stock.json');
+      const transactionsData: Transaction[] =
         await this.helper.readJsonFile('transactions.json');
 
       const stockLevelsRaw = this.helper.decorateStockLevels(stockData);
@@ -40,8 +40,8 @@ export class AppService {
   async listStockData() {
     try {
       // Read stock.json and transactions.json
-      const stockData: stock[] = await this.helper.readJsonFile('stock.json');
-      const transactionsData: transaction[] =
+      const stockData: Stock[] = await this.helper.readJsonFile('stock.json');
+      const transactionsData: Transaction[] =
         await this.helper.readJsonFile('transactions.json');
 
       const stockLevelsRaw = this.helper.decorateStockLevels(stockData);
