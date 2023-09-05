@@ -4,16 +4,16 @@ import { Stock } from '../../../interfaces/stock.interface';
 import { Transaction } from '../../../interfaces/transaction.interface';
 import { TRANSACTION_TYPE } from '../../../interfaces/enums';
 @Injectable()
-export class HelperService {
-  constructor() {}
-  private readonly logger = new Logger(HelperService.name);
+export class UtilsService {
+  constructor() { }
+  private readonly logger = new Logger(UtilsService.name);
 
   async readJsonFile(filePath: string) {
     const content = await readFile(filePath, 'utf-8');
     return JSON.parse(content);
   }
 
-  decorateStockLevels(stockData: Stock[]): { [key: string]: number } {
+  getStockLevels(stockData: Stock[]): Record<string, number> {
     const stockLevels = {};
     for (const item of stockData) {
       stockLevels[item.sku] = item.stock;
@@ -22,13 +22,13 @@ export class HelperService {
   }
 
   applyTransactionToStockLevels(
-    stockeLevels: { [key: string]: number },
+    stockeLevels: Record<string, number>,
     transactionsData: Transaction[],
-  ): { [key: string]: number } {
+  ): Record<string, number> {
     // Process transactions from transactions.json
     for (const transaction of transactionsData) {
       const { sku, type, qty } = transaction;
-      if (stockeLevels[sku] === undefined) {
+      if (!stockeLevels[sku]) {
         stockeLevels[sku] = 0; // Assuming starting quantity for missing SKUs is 0
       }
 

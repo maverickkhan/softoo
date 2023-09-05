@@ -1,19 +1,19 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { HelperService } from './helper.service';
+import { UtilsService } from './utils.service';
 import { promises as fsPromises } from 'fs';
 import { Stock } from '../../../interfaces/stock.interface';
 import { Transaction } from '../../../interfaces/transaction.interface';
 import { TRANSACTION_TYPE } from '../../../interfaces/enums';
 
 describe('HelperService', () => {
-  let service: HelperService;
+  let service: UtilsService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [HelperService],
+      providers: [UtilsService],
     }).compile();
 
-    service = module.get<HelperService>(HelperService);
+    service = module.get<UtilsService>(UtilsService);
   });
 
   it('should be defined', () => {
@@ -40,7 +40,7 @@ describe('HelperService', () => {
         { sku: 'SKU002', stock: 20 },
       ];
 
-      const result = service.decorateStockLevels(stockData);
+      const result = service.getStockLevels(stockData);
 
       expect(result).toEqual({
         SKU001: 10,
