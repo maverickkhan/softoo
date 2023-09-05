@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { StocksController } from './stocks.controller';
 import { StocksService } from './stocks.service';
-import { UtilsService } from '../shared/services/utils/utils.service';
 import { NotFoundException } from '@nestjs/common';
+import { UtilsService } from '../utils/utils.service';
 
 describe('AppController', () => {
   let appController: StocksController;

@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UtilsService } from './utils.service';
 import { promises as fsPromises } from 'fs';
-import { Stock } from '../../../interfaces/stock.interface';
-import { Transaction } from '../../../interfaces/transaction.interface';
-import { TRANSACTION_TYPE } from '../../../interfaces/enums';
+import { Stock } from '../interfaces/stock.interface';
+import { Transaction } from '../interfaces/transaction.interface';
+import { TRANSACTION_TYPE } from '../interfaces/enums';
 
 describe('HelperService', () => {
   let service: UtilsService;

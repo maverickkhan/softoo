@@ -1,11 +1,14 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { readFile } from 'fs/promises';
-import { Stock } from '../../../interfaces/stock.interface';
-import { Transaction } from '../../../interfaces/transaction.interface';
-import { TRANSACTION_TYPE } from '../../../interfaces/enums';
+import { Stock } from '../interfaces/stock.interface';
+import { Transaction } from '../interfaces/transaction.interface';
+import { TRANSACTION_TYPE } from '../interfaces/enums';
+// import { Stock } from '../../../interfaces/stock.interface';
+// import { Transaction } from '../../../interfaces/transaction.interface';
+// import { TRANSACTION_TYPE } from '../../../interfaces/enums';
 @Injectable()
 export class UtilsService {
-  constructor() { }
+  constructor() {}
   private readonly logger = new Logger(UtilsService.name);
 
   async readJsonFile(filePath: string) {
