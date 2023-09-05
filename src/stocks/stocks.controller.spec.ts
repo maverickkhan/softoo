@@ -1,21 +1,21 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { HelperService } from './shared/services/helper/helper.service';
+import { StocksController } from './stocks.controller';
+import { StocksService } from './stocks.service';
+import { UtilsService } from '../shared/services/utils/utils.service';
 import { NotFoundException } from '@nestjs/common';
 
 describe('AppController', () => {
-  let appController: AppController;
-  let appService: AppService;
+  let appController: StocksController;
+  let appService: StocksService;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      controllers: [AppController],
-      providers: [AppService, HelperService],
+      controllers: [StocksController],
+      providers: [StocksService, UtilsService],
     }).compile();
 
-    appController = app.get<AppController>(AppController);
-    appService = app.get<AppService>(AppService);
+    appController = app.get<StocksController>(StocksController);
+    appService = app.get<StocksService>(StocksService);
   });
 
   describe('stockDataGet', () => {
@@ -45,7 +45,7 @@ describe('AppController', () => {
 
       const sku = 'DTW874360/97/81';
 
-      const result = await appController.stockDataGet({ sku });
+      const result = await appController.getStockData({ sku });
 
       expect(result).toEqual({ sku: sku, qty: mockStockData[sku] });
       expect(appService.getStockData).toHaveBeenCalledWith(sku);
@@ -67,7 +67,7 @@ describe('AppController', () => {
         .mockImplementation(mockAppService.getStockData);
 
       try {
-        await appController.stockDataGet({ sku: unknownSku });
+        await appController.getStockData({ sku: unknownSku });
       } catch (error) {
         expect(error.message).toBe(`SKU "${unknownSku}" not found.`);
         expect(error).toBeInstanceOf(NotFoundException);
