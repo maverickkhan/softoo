@@ -1,23 +1,3 @@
-// import { Test, TestingModule } from '@nestjs/testing';
-// import { StocksService } from './stocks.service';
-// import { UtilsService } from '../shared/services/utils/utils.service';
-
-// describe('StocksService', () => {
-//   let service: StocksService;
-
-//   beforeEach(async () => {
-//     const module: TestingModule = await Test.createTestingModule({
-//       providers: [StocksService, UtilsService],
-//     }).compile();
-
-//     service = module.get<StocksService>(StocksService);
-//   });
-
-//   it('should be defined', () => {
-//     expect(service).toBeDefined();
-//   });
-// });
-
 import { Test, TestingModule } from '@nestjs/testing';
 import { StocksService } from './stocks.service';
 import { UtilsService } from '../shared/services/utils/utils.service';
@@ -30,7 +10,7 @@ describe('StocksService', () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         StocksService,
-        UtilsService, // Provide a mock or stub for UtilsService here if needed
+        UtilsService,
       ],
     }).compile();
 
@@ -40,7 +20,6 @@ describe('StocksService', () => {
 
   describe('getStockData', () => {
     it('should return stock data for a valid SKU', async () => {
-      // Mock the readJsonFile method using jest.spyOn
       const readJsonFileMock = jest.spyOn(utilsService, 'readJsonFile');
       readJsonFileMock.mockResolvedValueOnce([
         { sku: "XOE089797/10/74", stock: 2226 },
@@ -55,12 +34,10 @@ describe('StocksService', () => {
       expect(result).toEqual({ sku: 'XOE089797/10/74', qty: 2226 });
     });
 
-    // Add more test cases for SKU not found and error scenarios
   });
 
   describe('listStockData', () => {
     it('should return a list of stock data', async () => {
-      // Mock the readJsonFile method using jest.spyOn
       const readJsonFileMock = jest.spyOn(utilsService, 'readJsonFile');
       readJsonFileMock.mockResolvedValueOnce([
         { sku: "XOE089797/10/74", stock: 2226 },
@@ -77,7 +54,5 @@ describe('StocksService', () => {
         { sku: 'ENN169733/05/69', qty: 9570 }
       ]);
     });
-
-    // Add more test cases for error scenarios
   });
 });
